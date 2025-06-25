@@ -1,0 +1,8 @@
+@use 'functions' as *;
+@use '../partials/variables' as vars;
+
+@mixin text-preset-headers($color) {
+  font-size: pixToRem(16);
+  line-height: 1.5;
+  color: $color;
+}

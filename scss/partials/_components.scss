@@ -1,0 +1,67 @@
+@use 'variables' as vars;
+@use '../helpers/functions' as *;
+
+.button {
+  width: 100%;
+
+  border-radius: pixToRem(5);
+  border: none;
+
+  font-family: vars.$font-main;
+  font-weight: 700;
+  font-size: pixToRem(24);
+  line-height: 1.5;
+  text-align: center;
+  color: vars.$color-button-tips-text;
+
+  color: vars.$color-button-tips-text;
+  background-color: vars.$color-button-tips-background;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease-in-out, color 0.3s ease-in-out;
+
+  &:hover,
+  &:active,
+  &:focus-within {
+    color: vars.$color-button-tips-text-active;
+    background-color: vars.$color-button-tips-background-active;
+  }
+}
+.input {
+  padding: pixToRem(8) pixToRem(16);
+
+  font-family: vars.$font-main;
+  font-weight: 700;
+  font-size: pixToRem(24);
+  line-height: 1.5;
+  text-align: right;
+
+  border: none;
+  border-radius: pixToRem(5);
+  color: vars.$color-input-text-active;
+  background-color: vars.$color-input-background;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  -moz-appearance: textfield;
+
+  &::placeholder {
+    // font-family: vars.$font-main;
+    // font-weight: 700;
+    // font-size: pixToRem(24);
+    // line-height: 1.5;
+    // text-align: right;
+    color: vars.$color-input-text;
+  }
+}
+
+@media (min-width: vars.$bp-tablet) {
+}
+
+@media (min-width: vars.$bp-desktop) {
+}

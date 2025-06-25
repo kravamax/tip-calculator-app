@@ -1,0 +1,41 @@
+@use '../partials/variables' as vars;
+@use './mixins' as *;
+
+.sub-header {
+  @include text-preset-headers($color: vars.$color-input-headers);
+}
+
+.input {
+  width: 100%;
+  border-radius: pixToRem(5);
+  padding: pixToRem(8) pixToRem(16);
+  background-color: vars.$color-input-background;
+}
+
+.button-tip--active {
+  color: vars.$color-button-tips-text-active;
+  background-color: vars.$color-button-tips-background-active;
+}
+
+.sub-header__error--hidden {
+  opacity: 0;
+  // visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.input__correct {
+  outline: 2px solid vars.$color-input-border-success;
+}
+
+.input__error {
+  outline: 2px solid vars.$color-input-border-error;
+}
+
+// .hidden {
+//   display: none;
+// }
+
+.visible {
+  opacity: 1;
+  // visibility: visible;
+}

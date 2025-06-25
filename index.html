@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Tip calculator app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <h1 class="logo"><img src="./images/logo.svg" alt="Splitter logo" /></h1>
+    <article class="main__container">
+      <form action="" class="form__container">
+        <div class="bill__container">
+          <div class="input-bill__container">
+            <div class="sub-header__row">
+              <label for="bill" class="input-label sub-header">Bill</label>
+              <span
+                class="sub-header input-bill__sub-header--error sub-header__error--hidden"
+                >Must be greater than zero</span
+              >
+            </div>
+            <div class="input__wrapper">
+              <input
+                class="input input__bill"
+                id="bill"
+                name="bill"
+                type="number"
+                placeholder="0"
+              />
+            </div>
+          </div>
+          <div class="select-tip__container">
+            <div class="input-label sub-header">Select Tip %</div>
+            <ul class="select-tip__list">
+              <li class="select-tip__item">
+                <button class="select-tip__button button">5%</button>
+              </li>
+              <li class="select-tip__item">
+                <button class="select-tip__button button">10%</button>
+              </li>
+              <li class="select-tip__item">
+                <button class="select-tip__button button">15%</button>
+              </li>
+              <li class="select-tip__item">
+                <button class="select-tip__button button">25%</button>
+              </li>
+              <li class="select-tip__item">
+                <button class="select-tip__button button">50%</button>
+              </li>
+              <li class="select-tip__item">
+                <input
+                  type="number"
+                  class="input input__custom-tip"
+                  id="custom-tip"
+                  name="custom-tip"
+                  placeholder="Custom"
+                />
+              </li>
+            </ul>
+          </div>
+          <div class="number-people__container">
+            <div class="sub-header__row">
+              <label class="input-label sub-header" for="number-people"
+                >Number of People</label
+              >
+              <span
+                class="sub-header number-people__sub-header--error sub-header__error--hidden"
+                >Can’t be zero</span
+              >
+            </div>
+            <div class="input__wrapper">
+              <input
+                type="number"
+                class="input input__number-people"
+                id="number-people"
+                name="number-people"
+                placeholder="0"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="results__container">
+          <div class="results__media-container">
+            <div class="results__row">
+              <div class="tip-amount__block">
+                <p class="sub-header results__header">Tip Amount</p>
+                <small class="results__subheader">/ person</small>
+              </div>
+              <span class="tip-amount__result result-style">$0.00</span>
+            </div>
+            <div class="results__row">
+              <div class="total-media__block">
+                <p class="sub-header results__header">Total</p>
+                <small class="results__subheader">/ person</small>
+              </div>
+              <span class="total__result result-style">$0.00</span>
+            </div>
+          </div>
+          <button type="reset" class="reset-button" disabled>reset</button>
+        </div>
+      </form>
+    </article>
+  </body>
+</html>

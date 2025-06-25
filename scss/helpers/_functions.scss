@@ -1,0 +1,32 @@
+@use 'sass:math';
+
+@function pixToRem($px) {
+  @return ($px / 16) * 1rem;
+}
+
+@function clampFluid($minValue, $maxValue, $minScreen: 320, $maxScreen: 1440) {
+  $minValueRem: $minValue / 16 * 1rem;
+  $maxValueRem: $maxValue / 16 * 1rem;
+
+  $valueDiff: $maxValue - $minValue;
+  $screenDiff: $maxScreen - $minScreen;
+
+  $slope: $valueDiff / $screenDiff;
+  $slopeVW: $slope * 100;
+  $base: $minValue - $slope * $minScreen;
+  $baseRem: $base / 16;
+
+  @if $minValue <= $maxValue {
+    @return clamp(
+      #{$minValueRem},
+      #{$baseRem}rem + #{$slopeVW}vw,
+      #{$maxValueRem}
+    );
+  } @else {
+    @return clamp(
+      #{$maxValueRem},
+      #{$baseRem}rem + #{$slopeVW}vw,
+      #{$minValueRem}
+    );
+  }
+}

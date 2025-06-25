@@ -1,0 +1,43 @@
+@use '../helpers/functions' as *;
+
+$bp-mobile: pixToRem(375);
+$bp-tablet: pixToRem(768);
+$bp-desktop: pixToRem(1440);
+
+$font-main: 'Space Mono', monospace;
+$font-weight-primary: 700;
+
+$color-body-background: hsl(185, 41%, 84%);
+$color-calculator-background: hsl(0, 100%, 100%);
+
+$color-input-background: hsl(189, 42%, 97%);
+$color-input-headers: hsl(186, 14%, 43%);
+$color-input-text: hsl(184, 19%, 68%);
+$color-input-text-error: hsl(12, 72%, 61%);
+$color-input-text-active: hsl(183, 100%, 15%);
+$color-input-border-success: hsl(172, 67%, 46%);
+$color-input-border-error: hsl(12, 72%, 61%);
+
+$color-button-tips-text: hsl(0, 100%, 100%);
+$color-button-tips-text-active: hsl(183, 100%, 15%);
+$color-button-tips-background: hsl(183, 100%, 15%);
+$color-button-tips-background-active: hsl(173, 61%, 77%);
+
+$color-input-custom-tip-background: hsl(189, 47%, 97%);
+$color-input-custom-tip-text: hsl(182, 18%, 40%);
+
+$color-results-background: hsl(183, 100%, 15%);
+$color-results-headers: hsl(0, 100%, 100%);
+$color-results-description: hsl(184, 14%, 56%);
+$color-results-price: hsl(172, 67%, 45%);
+
+$color-results-button-reset-disabled: hsl(183, 75%, 25%);
+$color-results-button-active: hsl(172, 67%, 45%);
+$color-results-button-reset-hover: hsl(173, 61%, 77%);
+$color-results-text-button-reset-disabled: hsl(183, 85%, 21%);
+$color-results-text-button-reset-active: hsl(183, 100%, 15%);
+
+$box-shadow-calculator: 0 pixToRem(32) pixToRem(43) 0 rgba(79, 166, 175, 0.2);
+
+$border-buttons-radius: pixToRem(5);
+$border-input-radius: pixToRem(5);
