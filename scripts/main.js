@@ -12,8 +12,6 @@ const selectTipButtons = document.querySelector('.select-tip__list');
 const customTipInput = document.querySelector('#custom-tip');
 const buttons = document.querySelectorAll('.select-tip__button');
 const inputs = form.querySelectorAll('.input');
-const tipAmountValue = document.querySelector('.tip-amount__result');
-const totalValue = document.querySelector('.total__result');
 
 let billValue = '';
 let tipValue = '';
@@ -24,6 +22,12 @@ import {
   allowOnlyFloat,
   hideInputBillErrorMessage,
   hideNumPeopleErrorMessage,
+  removeClassFromElement,
+  addClassToElement,
+  setResultsDefaultValues,
+  renderResults,
+  addSuccessBorderToInput,
+  addErrorBorderToInput,
 } from './helpers.js';
 
 inputBill.addEventListener('keydown', allowOnlyFloat);
@@ -32,79 +36,67 @@ customTipInput.addEventListener('keydown', allowOnlyInt);
 
 inputBill.addEventListener('input', (e) => {
   e.preventDefault();
+
   billValue = inputBill.value;
 
   hideInputBillErrorMessage(e, inputBillErrorMessage);
 
   if (isPositiveNumber(billValue) && billValue !== '') {
-    inputBillErrorMessage.classList.add('sub-header__error--hidden');
-
-    inputBill.classList.add('input__correct');
-    inputBill.classList.remove('input__error');
-
-    console.log('billValue', billValue);
+    addClassToElement(inputBillErrorMessage, 'sub-header__error--hidden');
+    addSuccessBorderToInput(inputBill);
   } else if (!isPositiveNumber(billValue) && billValue !== '') {
-    inputBillErrorMessage.classList.remove('sub-header__error--hidden');
-
-    inputBill.classList.remove('input__correct');
-    inputBill.classList.add('input__error');
+    removeClassFromElement(inputBillErrorMessage, 'sub-header__error--hidden');
+    addErrorBorderToInput(inputBill);
   }
 });
 
 inputNumPeople.addEventListener('input', (e) => {
   e.preventDefault();
 
-  numPeopleValue = inputNumPeople.value;
+  numPeopleValue = e.target.value;
 
   hideNumPeopleErrorMessage(e, inputNumPeopleErrorMessage);
 
-  if (isPositiveNumber(numPeopleValue) && numPeopleValue !== '') {
-    inputNumPeopleErrorMessage.classList.add('sub-header__error--hidden');
-
-    inputNumPeople.classList.add('input__correct');
-    inputNumPeople.classList.remove('input__error');
-  } else if (!isPositiveNumber(numPeopleValue) && numPeopleValue !== '') {
+  if (isPositiveNumber(e.target.value) && e.target.value !== '') {
+    addClassToElement(inputNumPeopleErrorMessage, 'sub-header__error--hidden');
+    addSuccessBorderToInput(inputNumPeople);
+  } else if (!isPositiveNumber(e.target.value) && e.target.value !== '') {
     inputNumPeopleErrorMessage.classList.remove('sub-header__error--hidden');
 
     inputNumPeople.classList.remove('input__correct');
     inputNumPeople.classList.add('input__error');
   }
-
-  console.log('numPeopleValue', numPeopleValue);
 });
 
 selectTipButtons.addEventListener('click', (e) => {
   e.preventDefault();
+  removeClassFromElement(customTipInput, 'button-tip--active');
+  resetButton.disabled = false;
 
   if (e.target.classList.contains('select-tip__button')) {
     customTipInput.value = '';
-    //   tipValue = parseInt(e.target.dataset.tipValue);
+
     tipValue = Number(e.target.dataset.tipValue);
-    customTipInput.classList.remove('input__correct');
+    removeClassFromElement(customTipInput, 'input__correct');
 
-    buttons.forEach((btn) => btn.classList.remove('button-tip--active'));
-    e.target.classList.add('.input__correct');
+    buttons.forEach((btn) => removeClassFromElement(btn, 'button-tip--active'));
 
-    console.log('Выбран процент', tipValue);
+    addClassToElement(e.target, 'input__correct');
   }
 
-  e.target.classList.add('.button-tip--active');
+  e.target.classList.add('button-tip--active');
+});
 
-  //   if (tipValue && tipValue !== 'custom') {
-  //     customTipInput.value = '';
-  //     customTipInput.classList.remove('input__correct');
-  //   }
+customTipInput.addEventListener('click', () => {
+  buttons.forEach((btn) => removeClassFromElement(btn, 'button-tip--active'));
 });
 
 customTipInput.addEventListener('input', (e) => {
-  buttons.forEach((btn) => btn.classList.remove('button-tip--active'));
   tipValue = Number(e.target.value);
 
   if (tipValue) {
-    customTipInput.classList.add('input__correct');
+    addClassToElement(customTipInput, 'input__correct');
   }
-
-  console.log('Кастомный процент:', tipValue);
 });
 
 inputs.forEach((input) => {
@@ -117,58 +109,39 @@ function isPositiveNumber(value) {
 
 function checkFormValues() {
   const hasValue = Array.from(inputs).some(
-    (input) => input.value.trim() !== ''
+    (input) => input.value.trim() !== '' || isPositiveNumber(input.value)
   );
 
-  console.log('hasValue', hasValue);
   resetButton.disabled = !hasValue;
 }
 
 form.addEventListener('reset', () => {
   inputs.forEach((input) => {
-    input.classList.remove('input__correct');
-    input.classList.remove('input__error');
-    inputBillErrorMessage.classList.add('sub-header__error--hidden');
-    inputNumPeopleErrorMessage.classList.add('sub-header__error--hidden');
+    input.classList.remove('input__correct', 'input__error');
+    addClassToElement(inputBillErrorMessage, 'sub-header__error--hidden');
+    addClassToElement(inputNumPeopleErrorMessage, 'sub-header__error--hidden');
   });
   setTimeout(() => {
-    tipAmountValue.innerText = '$0.00';
-    totalValue.innerText = '$0.00';
+    billValue = null;
+    tipValue = null;
+    numPeopleValue = null;
+
+    setResultsDefaultValues();
+    removeClassFromElement(customTipInput, 'button-tip--active');
+    buttons.forEach((btn) => removeClassFromElement(btn, 'button-tip--active'));
+
     resetButton.disabled = true;
   }, 0);
 });
 
-form.addEventListener('input', (e) => {
-  const allInputsHasValue = Array.from(inputs).every(
-    (input) => input.value.trim() !== '' && input.value !== NaN
-  );
-
-  console.log('INPUTS');
-  console.log('Bill', billValue);
-  console.log('tipValue', tipValue);
-  console.log('numPeopleValue', numPeopleValue);
-
-  if (billValue === 0 || numPeopleValue === 0) {
-    tipAmountValue.innerText = '$0.00';
-    totalValue.innerText = '$0.00';
-    // resetButton.disabled = true;
-  } else if (allInputsHasValue) {
-    const totalValueCalculated = Number(
-      ((billValue * (1 + tipValue / 100)) / numPeopleValue).toFixed(2)
-    );
-    const tipAmountCalculated = Number(
-      (totalValueCalculated - billValue / numPeopleValue).toFixed(2)
-    );
-    tipAmountValue.innerText = `$${tipAmountCalculated}`;
-    totalValue.innerText = `$${totalValueCalculated}`;
-
-    // console.log('totalValueCalculated', totalValueCalculated);
-    // console.log('tipAmountCalculated', tipAmountCalculated);
+form.addEventListener('input', () => {
+  if (
+    isPositiveNumber(billValue) &&
+    isPositiveNumber(tipValue) &&
+    isPositiveNumber(numPeopleValue)
+  ) {
+    renderResults(billValue, tipValue, numPeopleValue);
   } else {
-    // resetButton.disabled = true;
-    tipAmountValue.innerText = '$0.00';
-    totalValue.innerText = '$0.00';
+    setResultsDefaultValues();
   }
 });
-
-// console.log('INPUTS', inputs);
