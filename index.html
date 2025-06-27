@@ -20,6 +20,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
+    <script defer src="./scripts/main.js" type="module"></script>
   </head>
   <body>
     <h1 class="logo"><img src="./images/logo.svg" alt="Splitter logo" /></h1>
@@ -31,7 +32,7 @@
               <label for="bill" class="input-label sub-header">Bill</label>
               <span
                 class="sub-header input-bill__sub-header--error sub-header__error--hidden"
-                >Must be greater than zero</span
+                >Can’t be zero</span
               >
             </div>
             <div class="input__wrapper">
@@ -48,22 +49,33 @@
             <div class="input-label sub-header">Select Tip %</div>
             <ul class="select-tip__list">
               <li class="select-tip__item">
-                <button class="select-tip__button button">5%</button>
+                <button data-tip-value="5" class="select-tip__button button">
+                  5%
+                </button>
               </li>
               <li class="select-tip__item">
-                <button class="select-tip__button button">10%</button>
+                <button data-tip-value="10" class="select-tip__button button">
+                  10%
+                </button>
               </li>
               <li class="select-tip__item">
-                <button class="select-tip__button button">15%</button>
+                <button data-tip-value="15" class="select-tip__button button">
+                  15%
+                </button>
               </li>
               <li class="select-tip__item">
-                <button class="select-tip__button button">25%</button>
+                <button data-tip-value="25" class="select-tip__button button">
+                  25%
+                </button>
               </li>
               <li class="select-tip__item">
-                <button class="select-tip__button button">50%</button>
+                <button data-tip-value="50" class="select-tip__button button">
+                  50%
+                </button>
               </li>
               <li class="select-tip__item">
                 <input
+                  data-tip-value="custom"
                   type="number"
                   class="input input__custom-tip"
                   id="custom-tip"
