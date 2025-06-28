@@ -93,10 +93,12 @@ ul {
 
 .input__correct {
   outline: 2px solid hsl(172, 67%, 46%);
+  transition: opacity 0.2s ease-in-out;
 }
 
 .input__error {
   outline: 2px solid hsl(12, 72%, 61%);
+  transition: opacity 0.2s ease-in-out;
 }
 
 .visible {

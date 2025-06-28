@@ -79,13 +79,28 @@ selectTipButtons.addEventListener('click', (e) => {
     tipValue = Number(e.target.dataset.tipValue);
     removeClassFromElement(customTipInput, 'input__correct');
 
-    buttons.forEach((btn) => removeClassFromElement(btn, 'button-tip--active'));
+    if (
+      isPositiveNumber(billValue) &&
+      isPositiveNumber(tipValue) &&
+      isPositiveNumber(numPeopleValue)
+    ) {
+      renderResults(billValue, tipValue, numPeopleValue);
+    } else {
+      setResultsDefaultValues();
+    }
 
-    addClassToElement(e.target, 'input__correct');
+    buttons.forEach((btn) => {
+      removeClassFromElement(btn, 'button-tip--active');
+    });
   }
 
   e.target.classList.add('button-tip--active');
 });
+
+// selectTipButtons.addEventListener('input', (e) => {
+//   e.preventDefault();
+//   tipValue = Number(e.target.dataset.tipValue);
+// });
 
 customTipInput.addEventListener('click', () => {
   buttons.forEach((btn) => removeClassFromElement(btn, 'button-tip--active'));
@@ -108,9 +123,7 @@ function isPositiveNumber(value) {
 }
 
 function checkFormValues() {
-  const hasValue = Array.from(inputs).some(
-    (input) => input.value.trim() !== '' || isPositiveNumber(input.value)
-  );
+  const hasValue = [...inputs].some((input) => input.value.trim() !== '');
 
   resetButton.disabled = !hasValue;
 }
@@ -135,6 +148,10 @@ form.addEventListener('reset', () => {
 });
 
 form.addEventListener('input', () => {
+  billValue = inputBill.value;
+  numPeopleValue = inputNumPeople.value;
+  tipValue = customTipInput.value || tipValue;
+
   if (
     isPositiveNumber(billValue) &&
     isPositiveNumber(tipValue) &&

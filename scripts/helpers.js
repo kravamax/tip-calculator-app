@@ -52,8 +52,8 @@ export function setResultsDefaultValues() {
 }
 export function renderResults(billValue, tipValue, numPeopleValue) {
   const totalValueCalculated = Number(
-    ((billValue * (1 + tipValue / 100)) / numPeopleValue).toFixed(2)
-  );
+    (billValue * (1 + tipValue / 100)) / numPeopleValue
+  ).toFixed(2);
   const tipAmountCalculated = Number(
     (totalValueCalculated - billValue / numPeopleValue).toFixed(2)
   );

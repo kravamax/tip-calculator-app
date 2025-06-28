@@ -25,10 +25,12 @@
 
 .input__correct {
   outline: 2px solid vars.$color-input-border-success;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .input__error {
   outline: 2px solid vars.$color-input-border-error;
+  transition: opacity 0.2s ease-in-out;
 }
 
 // .hidden {
